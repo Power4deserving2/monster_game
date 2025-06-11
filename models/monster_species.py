@@ -6,11 +6,15 @@ class MonsterSpecies(Base):
 
     id = Column(Integer,primary_key=True)
     name =Column(String)
-    type =Column(String)
-    initial_stat =Column(JSON)
+    power_type =Column(String)
+    starting_stats =Column(JSON)
     strengths =Column(String)
     rarity=Column(String)
-    Weakness =Column(String)
+    weakness =Column(String)
+
+
+
+    
     
 
 
