@@ -67,3 +67,28 @@ def execute_turn(battle_id, attacker, defender, move_power, attacker_type, defen
 
     print(f"💥 {attacker['name']} dealt {damage} damage to {defender['name']}")
     return log_entry
+
+def check_battle_end(battle_id):
+    """
+    Placeholder function to determine if battle has ended.
+    Later can be replaced with HP-based or round-based check.
+    """
+    session = Session()
+    battle = session.query(Battle).filter_by(id=battle_id).first()
+
+    if not battle or not battle.result:
+        return False
+
+    if len(battle.result) >= 5:  # Let’s say 5 turns = battle ends
+        print(f"🏁 Battle {battle_id} has ended.")
+        return True
+
+    return False
+
+def apply_status_effects(monster_id, effect_type):
+    """
+    Dummy function for status effects: Burn, Freeze, Paralyze, etc.
+    You can expand it later by linking to monster instance HP/stats.
+    """
+    print(f"⚠️ Monster {monster_id} affected by {effect_type} status effect!")
+    # Future implementation: add logic to modify monster's state in DB
