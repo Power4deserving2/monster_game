@@ -22,3 +22,19 @@ def get_player_collection(player_id):
             "rarity": species.rarity
         })
     return collection
+
+def level_up_monster(monster_id):
+    """Increase monster level and boost stats."""
+    mon = session.query(PlayerMonster).filter_by(id=monster_id).first()
+
+    if not mon:
+        print("❌ Monster not found.")
+        return None
+
+    mon.level += 1
+    if mon.stats:
+        mon.stats['Attack'] += 2
+        mon.stats['Defense'] += 1
+    session.commit()
+    print(f"✨ {mon.nickname or 'Monster'} leveled up to Lv.{mon.level}!")
+    return mon
