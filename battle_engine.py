@@ -1,6 +1,6 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from models.battles import Battle
+from models.Battles import Battle
 
 engine = create_engine("sqlite:///Tables/monster.db")
 Session = sessionmaker(bind=engine)

@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import random
 from player_auth import create_player, login_player
 from battle_engine import create_battle, execute_turn, check_battle_end
@@ -179,6 +183,10 @@ def main():
             # You can simulate wild encounter with a random ID (say 1 to 3)
             species_id = random.choice([1, 2, 3])
             catch_monster(current_player.id, species_id)
+
+        elif choice == '9':
+            print("👋 Goodbye, thanks for playing!")
+            break
 
 if __name__ == "__main__":
     main()

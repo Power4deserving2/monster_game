@@ -1,6 +1,6 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from models.players_monsters import PlayerMonster
+from models.player_monsters import PlayerMonster
 from models.monster_species import MonsterSpecies
 
 engine = create_engine("sqlite:///Tables/monster.db")

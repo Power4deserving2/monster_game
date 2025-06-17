@@ -9,4 +9,4 @@ class PlayerMonster(Base):
     species_id = Column(Integer, ForeignKey('monster_species.id'), nullable=False)
     nickname = Column(String, nullable=True)
     level = Column(Integer, default=1)
-    stats = Column(JSON)  # Actual HP, Attack, etc.
+    stats = Column(JSON) 
