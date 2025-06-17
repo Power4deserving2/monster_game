@@ -34,16 +34,18 @@ def main():
 
             print(f"🌲 You encountered a wild Rockgrinder!")
 
-            # Mock stats
+            # 🔢 Mock stats including HP
             player_monster = {
                 "name": "Flamewyrm",
                 "Attack": 15,
-                "Defense": 5
+                "Defense": 5,
+                "HP": 60
             }
             wild_monster = {
                 "name": "Rockgrinder",
                 "Attack": 10,
-                "Defense": 6
+                "Defense": 6,
+                "HP": 50
             }
 
             battle_data = {
@@ -51,20 +53,24 @@ def main():
                 "player2": [wild_monster["name"]]
             }
 
-            # Start battle
+            # ⚔️ Start battle
             battle = create_battle(player1_id=current_player.id, monster_teams=battle_data, battle_type="wild")
             battle_id = battle.id
 
             turn = 1
+            max_turns = 20
+
             while True:
                 print(f"\n📦 Turn {turn}")
                 print("Choose your move:")
                 print("1. Fire Blast (Power 20)")
                 print("2. Tackle (Power 10)")
-                move = input("> ")
+                move = input("> ").strip()
 
                 move_power = 20 if move == '1' else 10
-                execute_turn(
+
+                # ✅ Player's turn
+                log = execute_turn(
                     battle_id,
                     attacker=player_monster,
                     defender=wild_monster,
@@ -72,10 +78,16 @@ def main():
                     attacker_type="Fire",
                     defender_type="Rock"
                 )
+                wild_monster["HP"] -= log["damage"]
 
-                print("👾 Wild Rockgrinder attacks back!")
+                if wild_monster["HP"] <= 0:
+                    print(f"🏆 You defeated the wild {wild_monster['name']}!")
+                    break
+
+                # 👾 Enemy attacks back
+                print(f"👾 Wild {wild_monster['name']} attacks back!")
                 wild_power = random.choice([8, 12])
-                execute_turn(
+                log = execute_turn(
                     battle_id,
                     attacker=wild_monster,
                     defender=player_monster,
@@ -83,9 +95,14 @@ def main():
                     attacker_type="Rock",
                     defender_type="Fire"
                 )
+                player_monster["HP"] -= log["damage"]
 
-                if check_battle_end(battle_id):
-                    print("🏆 Battle finished!")
+                if player_monster["HP"] <= 0:
+                    print("💀 Your monster fainted!")
+                    break
+
+                if turn >= max_turns:
+                    print("⚠️ The battle ended in a draw (too long).")
                     break
 
                 turn += 1

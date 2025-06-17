@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from player_monsters import PlayerMonster
-from monster_species import MonsterSpecies
+from models.players_monsters import PlayerMonster
+from models.monster_species import MonsterSpecies
 
 engine = create_engine("sqlite:///Tables/monster.db")
 Session = sessionmaker(bind=engine)
