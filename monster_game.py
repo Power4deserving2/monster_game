@@ -14,7 +14,8 @@ def main():
         print("4. View Monster Collection")
         print("5. Level Up a Monster")
         print("7. Propose Trade")
-        print("8. Exit")
+        print("8. Explore and Catch a Monster")
+        print("9. Exit")
 
         choice = input("Choose an option: ").strip()
 
@@ -154,6 +155,16 @@ def main():
 
             except Exception as e:
                 print("❌ Trade failed. Check input.")
+
+        elif choice == '8':
+            if not current_player:
+                print("⚠️ Login first.")
+                continue
+
+            from catching import catch_monster
+            # You can simulate wild encounter with a random ID (say 1 to 3)
+            species_id = random.choice([1, 2, 3])
+            catch_monster(current_player.id, species_id)
 
 if __name__ == "__main__":
     main()
