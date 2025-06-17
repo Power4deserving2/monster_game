@@ -129,9 +129,6 @@ def main():
             except:
                 print("❌ Invalid choice.")
 
-                else:
-                    print("❌ Invalid input.")
-
         elif choice == '7':
             if not current_player:
                 print("⚠️ Login first.")
